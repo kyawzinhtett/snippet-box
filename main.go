@@ -8,6 +8,7 @@ import (
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Server", "Go")
 	w.Write([]byte("Hello from snippetbox"))
 }
 
@@ -19,8 +20,7 @@ func snippetView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	msg := fmt.Sprintf("This is the id: %d", id)
-	w.Write([]byte(msg))
+	fmt.Fprintf(w, "This is the id: %d", id)
 }
 
 func snippetCreate(w http.ResponseWriter, r *http.Request) {
@@ -28,6 +28,7 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
 	w.Write([]byte("Save a snippet to DB..."))
 }
 
